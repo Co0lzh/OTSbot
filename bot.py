@@ -25,7 +25,7 @@ REGIONS = ["270000000", "310000000", "350000000"]  # ЗКО, Атырау, Ма�
 STATUSES = ["PUBLISHED", "COMPLETED", "CANCELED"]
 
 # API Samruk-Kazyna
-BASE_URL = "https://ows.goszakup.gov.kz/v3/tender"
+BASE_URL = "https://ows.goszakup.gov.kz/v3/tender/index"
 
 # Отправленные тендеры
 sent_tenders = set()
