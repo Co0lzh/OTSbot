@@ -89,6 +89,7 @@ async def start_cmd(message: types.Message):
 @dp.message(Command("check"))
 async def check_cmd(message: types.Message):
     await send_new_tenders(message.chat.id)
+    await message.reply("✅ Бот работает!")
 
 # 🚀 Запуск
 async def main():
