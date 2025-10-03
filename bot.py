@@ -40,12 +40,30 @@ def get_tenders(keyword, region, status):
         "customer_region": region,
         "purchase_status": status,
         "page": 1,
-        "limit": 20
+        "limit": 5
     }
-    r = requests.get(BASE_URL, params=params)
+
+    headers = {}
+    API_KEY = os.getenv("API_KEY")  # 🔑 возьми из окружения (если он у тебя есть)
+    if API_KEY:
+        headers["Authorization"] = f"Bearer {API_KEY}"
+
+    r = requests.get(BASE_URL, params=params, headers=headers)
+
+    print("➡️ Запрос:", r.url)          # полный URL запроса
+    print("🔢 Код ответа:", r.status_code)
+    try:
+        data = r.json()
+        print("📩 Ответ:", data)
+    except Exception as e:
+        print("❌ Ошибка разбора JSON:", e)
+        print("Текст ответа:", r.text)
+        return []
+
     if r.status_code == 200:
-        return r.json().get("items", [])
+        return data.get("items", [])
     return []
+
 
 # 🚀 Отправка новых тендеров
 async def send_new_tenders(chat_id):
